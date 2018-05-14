@@ -14,6 +14,10 @@
 #define RED_COLOR 0
 #define GREEN_COLOR 1
 #define BLUE_COLOR 2
+#include "log.h"
+#include <setjmp.h>
+
+static jmp_buf s_jumpBuffer;
 
 typedef struct _pixel {
         unsigned short int red;

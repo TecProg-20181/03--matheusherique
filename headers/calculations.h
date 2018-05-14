@@ -7,6 +7,7 @@
 
 #ifndef CALCULATIONS_H_
 #define CALCULATIONS_H_
+#include "constants.h"
 
 
 /**

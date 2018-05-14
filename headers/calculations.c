@@ -5,11 +5,7 @@
  *
  */
 
-#include <setjmp.h>
 #include "calculations.h"
-#include "log.h"
-
-static jmp_buf s_jumpBuffer;
 
 int minimum(int a, int b) {
         int which_input = 0;
