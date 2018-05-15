@@ -18,6 +18,7 @@
 #include <setjmp.h>
 #include <errno.h>
 #include <string.h>
+#include <assert.h> 
 
 static jmp_buf s_jumpBuffer;
 extern int errno;

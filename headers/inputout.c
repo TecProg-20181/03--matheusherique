@@ -32,6 +32,7 @@ void print_pixels_of_image(Image image) {
                         }
                         printf("\n");
                 }
+                log_debug("The pixels of image was successfully printed!");
         } else {
                 //catch
                 log_error("Error no %d occurred in print of image...", errno);
@@ -64,6 +65,7 @@ Image read_pixels_of_image(Image image) {
                 } else {
                         log_error("%s\n", strerror(errno));
                         log_error("Are you sure this file is .ppm?");
+                        assert (image_type[0] == 'P');
                 }
         } else {
                 //catch

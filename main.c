@@ -17,15 +17,17 @@ int main() {
         // Read one number to choose a image filter.
         int option_numbers;
         scanf("%d", &option_numbers);
+        assert (&option_numbers != NULL);
         log_info("%d option numbers have been selected...", option_numbers);
 
         if (!setjmp(s_jumpBuffer)) {
                 // try
                 for(int iterator = 0; iterator < option_numbers; ++iterator) {
-                        log_debug("Loop %d inside main...", iterator);
+                        log_debug("Loop %d inside main...", iterator + 1);
                         // Read one number to choose a image filter.
                         int option;
                         scanf("%d", &option);
+                        assert (&option != NULL);
                         log_info("%d case was chosen...", option);
 
                         switch(option) {
@@ -81,10 +83,9 @@ int main() {
                 }
 
                 print_pixels_of_image(image);
-                log_debug("The pixels of image was successfully printed!");
         } else {
                 // catch
-                log_error("An error occurred in main...");
+                log_error("Error %s occurred!\n", strerror(errno));
         }
 
         return 0;

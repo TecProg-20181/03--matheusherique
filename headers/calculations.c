@@ -8,6 +8,8 @@
 #include "calculations.h"
 
 int minimum(int a, int b) {
+        assert (&a != NULL);
+        assert (&b != NULL);
         int which_input = 0;
 
         if (!setjmp(s_jumpBuffer)) {
@@ -19,7 +21,7 @@ int minimum(int a, int b) {
                 }
         } else {
                 // catch
-                log_error("An error occurred!");
+                log_error("Error %s occurred\n", strerror(errno));
         }
 
         return which_input;
@@ -27,6 +29,8 @@ int minimum(int a, int b) {
 
 
 int maximum(int a, int b) {
+        assert (&a != NULL);
+        assert (&b != NULL);
         int which_input = 0;
 
         if (!setjmp(s_jumpBuffer)) {
@@ -38,7 +42,7 @@ int maximum(int a, int b) {
                 }
         } else {
                 // catch
-                log_error("An error occurred!");
+                log_error("Error %s occurred\n", strerror(errno));
         }
 
         return which_input;
