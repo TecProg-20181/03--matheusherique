@@ -34,7 +34,8 @@ void print_pixels_of_image(Image image) {
                 }
         } else {
                 //catch
-                log_error("An error occurred in print of image...");
+                log_error("Error no %d occurred in print of image...", errno);
+                log_error("Error printing image: %s\n", strerror(errno));
         }
 }
 
@@ -48,22 +49,26 @@ Image read_pixels_of_image(Image image) {
                 // Read type of image.
                 char image_type[4];
                 scanf("%s", image_type);
-
-                // Read width, height and color of image.
-                int max_color;
-                scanf("%u %u %d", &image.width, &image.height, &max_color);
-
-                // read all pixels of image
-                for (unsigned int row = 0; row < image.height; ++row) {
-                        for (unsigned int column = 0; column < image.width; ++column) {
-                                scanf("%hu %hu %hu", &image.pixel[row][column][RED_COLOR],
-                                      &image.pixel[row][column][GREEN_COLOR],
-                                      &image.pixel[row][column][BLUE_COLOR]);
+                if (image_type[0] == 'P') {
+                        // Read width, height and color of image.
+                        int max_color;
+                        scanf("%u %u %d", &image.width, &image.height, &max_color);
+                        // read all pixels of image
+                        for (unsigned int row = 0; row < image.height; ++row) {
+                                for (unsigned int column = 0; column < image.width; ++column) {
+                                        scanf("%hu %hu %hu", &image.pixel[row][column][RED_COLOR],
+                                              &image.pixel[row][column][GREEN_COLOR],
+                                              &image.pixel[row][column][BLUE_COLOR]);
+                                }
                         }
+                } else {
+                        log_error("%s\n", strerror(errno));
+                        log_error("Are you sure this file is .ppm?");
                 }
         } else {
                 //catch
-                log_error("An error occurred in read of image...");
+                log_error("Error no %d occurred in read of image...", errno);
+                log_error("Error reading image: %s\n", strerror(errno));
         }
 
         return image;

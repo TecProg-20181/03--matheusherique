@@ -16,8 +16,11 @@
 #define BLUE_COLOR 2
 #include "log.h"
 #include <setjmp.h>
+#include <errno.h>
+#include <string.h>
 
 static jmp_buf s_jumpBuffer;
+extern int errno;
 
 typedef struct _pixel {
         unsigned short int red;
