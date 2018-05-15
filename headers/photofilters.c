@@ -1,12 +1,11 @@
 /**
-* This file is part of Photopobre project.
-* @file photofilters.c
-* @brief This file include all functions used for the image filters of project
-*
-*/
+ * This file is part of Photopobre project.
+ * @file photofilters.c
+ * @brief This file include all functions used for the image filters of project
+ *
+ */
 
 #include "photofilters.h"
-#include "calculations.h"
 
 Image grayscale(Image image) {
 
@@ -28,19 +27,16 @@ Image grayscale(Image image) {
 Image blur(Image image) {
         int size = 0;
         scanf("%d", &size);
-        for (unsigned int line = 0; line < image.height; ++line) {
-                for (unsigned int column = 0; column < image.width; ++column) {
+        for (int line = 0; line < image.height; line++) {
+                for (int column = 0; column < image.width; column++) {
                         Pixel media = {0, 0, 0};
-
-
-                        for(int pixel_line = maximum(0, line - size/2); pixel_line <= minimum(image.height - 1, line + size/2); ++pixel_line) {
-                                for(int pixel_column = maximum(0, column - size/2); pixel_column <= minimum(image.width - 1, column + size/2); ++pixel_column) {
+                        for(int pixel_line = fmax(0, line - size/2); pixel_line <= fmin(image.height - 1, line + size/2); ++pixel_line) {
+                                for(int pixel_column = fmax(0, column - size/2); pixel_column <= fmin(image.width - 1, column + size/2); ++pixel_column) {
                                         media.red += image.pixel[pixel_line][pixel_column][RED_COLOR];
                                         media.green += image.pixel[pixel_line][pixel_column][GREEN_COLOR];
                                         media.blue += image.pixel[pixel_line][pixel_column][BLUE_COLOR];
                                 }
                         }
-
                         media.red /= size * size;
                         media.green /= size * size;
                         media.blue /= size * size;
@@ -118,13 +114,13 @@ Image sepia_filter(Image image) {
 
                         int sepia_filter =  pixel_color.red * .393 + pixel_color.green * .769 + pixel_color.blue * .189;
 
-                        image.pixel[line][column][RED_COLOR] = minimum(sepia_filter,255);
+                        image.pixel[line][column][RED_COLOR] = fmin(sepia_filter,255);
 
                         sepia_filter =  pixel_color.red * .349 + pixel_color.green * .686 + pixel_color.blue * .168;
-                        image.pixel[line][column][GREEN_COLOR] = minimum(sepia_filter,255);
+                        image.pixel[line][column][GREEN_COLOR] = fmin(sepia_filter,255);
 
                         sepia_filter =  pixel_color.red * .272 + pixel_color.green * .534 + pixel_color.blue * .131;
-                        image.pixel[line][column][BLUE_COLOR] = minimum(sepia_filter,255);
+                        image.pixel[line][column][BLUE_COLOR] = fmin(sepia_filter,255);
                 }
         }
         return image;

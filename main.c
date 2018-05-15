@@ -18,12 +18,21 @@ int main() {
         int option_numbers;
         scanf("%d", &option_numbers);
         assert (&option_numbers != NULL);
-        log_info("%d option numbers have been selected...", option_numbers);
+        log_debug("%d option numbers have been selected...", option_numbers);
 
-        if (!setjmp(s_jumpBuffer)) {
+        if(!setjmp(s_jumpBuffer)) {
                 // try
-                for(int iterator = 0; iterator < option_numbers; ++iterator) {
-                        log_debug("Loop %d inside main...", iterator + 1);
+                for(unsigned int iterator = 0; iterator < option_numbers; iterator++) {
+                        if(iterator == 0) {
+                                log_info("Loop %dst inside main...", iterator + 1);
+                        } else if(iterator == 1) {
+                                log_info("Loop %dnd inside main...", iterator + 1);
+                        } else if(iterator == 2) {
+                                log_info("Loop %drd inside main...", iterator + 1);
+                        } else {
+                                log_info("Loop %dth inside main...", iterator + 1);
+                        }
+
                         // Read one number to choose a image filter.
                         int option;
                         scanf("%d", &option);

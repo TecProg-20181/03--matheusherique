@@ -8,7 +8,6 @@
 #ifndef PHOTOFILTERS_H_
 #define PHOTOFILTERS_H_
 #include "inputout.h"
-#include "calculations.h"
 #include <stdio.h>
 
 void image_rotation (int how_many_times, Image image);
