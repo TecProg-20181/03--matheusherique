@@ -63,7 +63,8 @@ int main() {
                                         log_debug("Rotate image was initialized...");
                                         int how_many_times = 0;
                                         scanf("%d", &how_many_times);
-                                        image_rotation (how_many_times, image);
+                                        how_many_times %= 4;
+                                        image = image_rotation(how_many_times, image);
                                         break;
                                 }
                                 // Mirror effect filter.

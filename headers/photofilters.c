@@ -56,11 +56,11 @@ Image rotate_nineth_degrees_to_the_right(Image image) {
         rotate.width = image.height;
         rotate.height = image.width;
 
-        for (unsigned int row = 0, y = 0; row < rotate.height; ++row, ++y) {
-                for (int column = rotate.width - 1, x = 0; column >= 0; --column, ++x) {
-                        rotate.pixel[row][column][RED_COLOR] = image.pixel[x][y][RED_COLOR];
-                        rotate.pixel[row][column][GREEN_COLOR] = image.pixel[x][y][GREEN_COLOR];
-                        rotate.pixel[row][column][BLUE_COLOR] = image.pixel[x][y][BLUE_COLOR];
+        for (int column = 0, y = 0; column < rotate.height; ++column, ++y) {
+                for (int row = rotate.width - 1, x = 0; row >= 0; --row, ++x) {
+                        rotate.pixel[column][row][RED_COLOR] = image.pixel[x][y][RED_COLOR];
+                        rotate.pixel[column][row][GREEN_COLOR] = image.pixel[x][y][GREEN_COLOR];
+                        rotate.pixel[column][row][BLUE_COLOR] = image.pixel[x][y][BLUE_COLOR];
                 }
         }
 
@@ -130,42 +130,46 @@ Image mirror_effect(Image image) {
         int horizontal = 0;
         scanf("%d", &horizontal);
 
+        int width = image.width;
+        int height = image.height;
+
         if (horizontal == 1) {
-                image.width /= 2;
+                width /= 2;
         } else {
-                image.height /= 2;
+                height /= 2;
         }
 
-        for (int line = 0; line < image.height; ++line) {
-                for (int column = 0; column < image.width; ++column) {
+        for (int column = 0; column < height; ++column) {
+                for (int line = 0; line < width; ++line) {
                         int pixel_line = line, pixel_column = column;
 
                         if (horizontal == 1) {
-                                pixel_column = image.width - 1 - column;
+                                pixel_line = image.width - 1 - line;
                         } else {
-                                pixel_line = image.height - 1 - line;
+                                pixel_column = image.height - 1 - column;
                         }
 
                         Pixel auxiliary_pixel;
-                        auxiliary_pixel.red = image.pixel[line][column][RED_COLOR];
-                        auxiliary_pixel.green = image.pixel[line][column][GREEN_COLOR];
-                        auxiliary_pixel.blue = image.pixel[line][column][BLUE_COLOR];
+                        auxiliary_pixel.red = image.pixel[column][line][RED_COLOR];
+                        auxiliary_pixel.green = image.pixel[column][line][GREEN_COLOR];
+                        auxiliary_pixel.blue = image.pixel[column][line][BLUE_COLOR];
 
-                        image.pixel[line][column][RED_COLOR] = image.pixel[pixel_line][pixel_column][RED_COLOR];
-                        image.pixel[line][column][GREEN_COLOR] = image.pixel[pixel_line][pixel_column][GREEN_COLOR];
-                        image.pixel[line][column][BLUE_COLOR] = image.pixel[pixel_line][pixel_column][BLUE_COLOR];
+                        image.pixel[column][line][RED_COLOR] = image.pixel[pixel_column][pixel_line][RED_COLOR];
+                        image.pixel[column][line][GREEN_COLOR] = image.pixel[pixel_column][pixel_line][GREEN_COLOR];
+                        image.pixel[column][line][BLUE_COLOR] = image.pixel[pixel_column][pixel_line][BLUE_COLOR];
 
-                        image.pixel[pixel_line][pixel_column][RED_COLOR] = auxiliary_pixel.red;
-                        image.pixel[pixel_line][pixel_column][GREEN_COLOR] = auxiliary_pixel.green;
-                        image.pixel[pixel_line][pixel_column][BLUE_COLOR] = auxiliary_pixel.blue;
+                        image.pixel[pixel_column][pixel_line][RED_COLOR] = auxiliary_pixel.red;
+                        image.pixel[pixel_column][pixel_line][GREEN_COLOR] = auxiliary_pixel.green;
+                        image.pixel[pixel_column][pixel_line][BLUE_COLOR] = auxiliary_pixel.blue;
                 }
         }
         return image;
 }
 
-void image_rotation (int how_many_times, Image img){
+Image image_rotation(int how_many_times, Image image){
         how_many_times %= 4;
         for (int j = 0; j < how_many_times; ++j) {
-                img = rotate_nineth_degrees_to_the_right(img);
+                image = rotate_nineth_degrees_to_the_right(image);
         }
+        return image;
 }
