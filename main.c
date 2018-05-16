@@ -17,7 +17,12 @@ int main() {
         // Read one number to choose a image filter.
         int option_numbers;
         scanf("%d", &option_numbers);
-        assert (&option_numbers != NULL);
+        assert(&option_numbers != NULL);
+        if(option_numbers <= 0){
+                log_error("You have to select a number greater than or equal to 1!\n");
+                assert(option_numbers != 0);
+        }
+
         log_debug("%d option numbers have been selected...", option_numbers);
 
         if(!setjmp(s_jumpBuffer)) {
@@ -42,46 +47,43 @@ int main() {
                         switch(option) {
                                 // Grayscale filter.
                                 case 1: {
-                                        log_debug("Grayscale filter was initialized...");
+                                        log_debug("Initializing Grayscale filter...");
                                         image = grayscale(image);
                                         break;
                                 }
                                 // Sepia filter.
                                 case 2: {
-                                        log_debug("Sepia filter was initialized...");
+                                        log_debug("Initializing Sepia filter...");
                                         image = sepia_filter(image);
                                         break;
                                 }
                                 // Blur filter.
                                 case 3: {
-                                        log_debug("Blur filter was initialized...");
+                                        log_debug("Initializing Blur filter...");
                                         image = blur(image);
                                         break;
                                 }
                                 // Rotate image.
                                 case 4: {
-                                        log_debug("Rotate image was initialized...");
-                                        int how_many_times = 0;
-                                        scanf("%d", &how_many_times);
-                                        how_many_times %= 4;
-                                        image = image_rotation(how_many_times, image);
+                                        log_debug("Initializing Rotate image...");
+                                        image = image_rotation(image);
                                         break;
                                 }
                                 // Mirror effect filter.
                                 case 5: {
-                                        log_debug("Mirror effect filter was initialized...");
+                                        log_debug("Initializing Mirror effect filter...");
                                         image = mirror_effect(image);
                                         break;
                                 }
                                 // Color invert filter.
                                 case 6: {
-                                        log_debug("Color invert filter was initialized...");
+                                        log_debug("Initializing Color invert filter...");
                                         image = color_invert(image);
                                         break;
                                 }
                                 // Cut image.
                                 case 7: {
-                                        log_debug("Cut image was initialized...");
+                                        log_debug("Initializing Cut image...");
                                         image = cut_image(image);
                                         break;
                                 }

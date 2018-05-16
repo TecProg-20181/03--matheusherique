@@ -8,7 +8,7 @@
 #include "photofilters.h"
 
 Image grayscale(Image image) {
-
+        log_debug("Grayscale filter was initialized!");
         for (unsigned int row = 0; row < image.height; ++row) {
                 for (unsigned int column = 0; column < image.width; ++column) {
                         int media = image.pixel[row][column][RED_COLOR] +
@@ -25,6 +25,7 @@ Image grayscale(Image image) {
 }
 
 Image blur(Image image) {
+        log_debug("Blur filter was initialized!");
         int size = 0;
         scanf("%d", &size);
         for (int line = 0; line < image.height; line++) {
@@ -51,6 +52,7 @@ Image blur(Image image) {
 }
 
 Image rotate_nineth_degrees_to_the_right(Image image) {
+        log_debug("Rotating 90 degrees to the right...");
         Image rotate;
 
         rotate.width = image.height;
@@ -68,6 +70,7 @@ Image rotate_nineth_degrees_to_the_right(Image image) {
 }
 
 Image color_invert(Image image) {
+        log_debug("Color invert filter was initialized!");
         for (unsigned int line = 0; line < image.height; ++line) {
                 for (unsigned int column = 0; column < image.width; ++column) {
                         image.pixel[line][column][RED_COLOR] = 255 - image.pixel[line][column][RED_COLOR];
@@ -81,7 +84,7 @@ Image color_invert(Image image) {
 
 
 Image cut_image(Image image) {
-
+        log_debug("Cut image was initialized!");
         int pixel_width, pixel_height;
         scanf("%d %d", &pixel_width, &pixel_height);
         int width, height;
@@ -104,6 +107,7 @@ Image cut_image(Image image) {
 }
 
 Image sepia_filter(Image image) {
+        log_debug("Sepia filter was initialized!");
         for (unsigned int line = 0; line < image.height; ++line) {
                 for (unsigned int column = 0; column < image.width; ++column) {
                         Pixel pixel_color;
@@ -127,6 +131,7 @@ Image sepia_filter(Image image) {
 }
 
 Image mirror_effect(Image image) {
+        log_debug("Mirror effect filter was initialized!");
         int horizontal = 0;
         scanf("%d", &horizontal);
 
@@ -166,7 +171,10 @@ Image mirror_effect(Image image) {
         return image;
 }
 
-Image image_rotation(int how_many_times, Image image){
+Image image_rotation(Image image){
+        log_debug("Rotate image was initialized!");
+        int how_many_times = 0;
+        scanf("%d", &how_many_times);
         how_many_times %= 4;
         for (int j = 0; j < how_many_times; ++j) {
                 image = rotate_nineth_degrees_to_the_right(image);
