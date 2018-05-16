@@ -9,8 +9,8 @@
 
 Image grayscale(Image image) {
         log_debug("Grayscale filter was initialized!");
-        for (unsigned int row = 0; row < image.height; ++row) {
-                for (unsigned int column = 0; column < image.width; ++column) {
+        for(unsigned int row = 0; row < image.height; ++row) {
+                for(unsigned int column = 0; column < image.width; ++column) {
                         int media = image.pixel[row][column][RED_COLOR] +
                                     image.pixel[row][column][GREEN_COLOR] +
                                     image.pixel[row][column][BLUE_COLOR];
@@ -28,7 +28,7 @@ Image blur(Image image) {
         log_debug("Blur filter was initialized!");
         int size = 0;
         scanf("%d", &size);
-        for (int line = 0; line < image.height; line++) {
+        for(int line = 0; line < image.height; line++) {
                 for (int column = 0; column < image.width; column++) {
                         Pixel media = {0, 0, 0};
                         for(int pixel_line = fmax(0, line - size/2); pixel_line <= fmin(image.height - 1, line + size/2); ++pixel_line) {
@@ -58,8 +58,8 @@ Image rotate_nineth_degrees_to_the_right(Image image) {
         rotate.width = image.height;
         rotate.height = image.width;
 
-        for (int column = 0, y = 0; column < rotate.height; ++column, ++y) {
-                for (int row = rotate.width - 1, x = 0; row >= 0; --row, ++x) {
+        for(int column = 0, y = 0; column < rotate.height; ++column, ++y) {
+                for(int row = rotate.width - 1, x = 0; row >= 0; --row, ++x) {
                         rotate.pixel[column][row][RED_COLOR] = image.pixel[x][y][RED_COLOR];
                         rotate.pixel[column][row][GREEN_COLOR] = image.pixel[x][y][GREEN_COLOR];
                         rotate.pixel[column][row][BLUE_COLOR] = image.pixel[x][y][BLUE_COLOR];
@@ -71,8 +71,8 @@ Image rotate_nineth_degrees_to_the_right(Image image) {
 
 Image color_invert(Image image) {
         log_debug("Color invert filter was initialized!");
-        for (unsigned int line = 0; line < image.height; ++line) {
-                for (unsigned int column = 0; column < image.width; ++column) {
+        for(unsigned int line = 0; line < image.height; ++line) {
+                for(unsigned int column = 0; column < image.width; ++column) {
                         image.pixel[line][column][RED_COLOR] = 255 - image.pixel[line][column][RED_COLOR];
                         image.pixel[line][column][GREEN_COLOR] = 255 - image.pixel[line][column][GREEN_COLOR];
                         image.pixel[line][column][BLUE_COLOR] = 255 - image.pixel[line][column][BLUE_COLOR];
@@ -108,7 +108,7 @@ Image cut_image(Image image) {
 
 Image sepia_filter(Image image) {
         log_debug("Sepia filter was initialized!");
-        for (unsigned int line = 0; line < image.height; ++line) {
+        for(unsigned int line = 0; line < image.height; ++line) {
                 for (unsigned int column = 0; column < image.width; ++column) {
                         Pixel pixel_color;
 
@@ -138,17 +138,17 @@ Image mirror_effect(Image image) {
         int width = image.width;
         int height = image.height;
 
-        if (horizontal == 1) {
+        if(horizontal == 1) {
                 width /= 2;
         } else {
                 height /= 2;
         }
 
-        for (int column = 0; column < height; ++column) {
-                for (int line = 0; line < width; ++line) {
+        for(int column = 0; column < height; ++column) {
+                for(int line = 0; line < width; ++line) {
                         int pixel_line = line, pixel_column = column;
 
-                        if (horizontal == 1) {
+                        if(horizontal == 1) {
                                 pixel_line = image.width - 1 - line;
                         } else {
                                 pixel_column = image.height - 1 - column;
@@ -176,7 +176,7 @@ Image image_rotation(Image image){
         int how_many_times = 0;
         scanf("%d", &how_many_times);
         how_many_times %= 4;
-        for (int j = 0; j < how_many_times; ++j) {
+        for(int j = 0; j < how_many_times; ++j) {
                 image = rotate_nineth_degrees_to_the_right(image);
         }
         return image;

@@ -10,7 +10,7 @@
 #include "inputout.h"
 #include <stdio.h>
 
-Image image_rotation (Image image);
+Image image_rotation(Image image);
 Image mirror_effect(Image image);
 Image sepia_filter(Image image);
 Image grayscale(Image image);

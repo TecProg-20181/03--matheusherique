@@ -27,21 +27,21 @@ int main() {
 
         if(!setjmp(s_jumpBuffer)) {
                 // try
-                for(unsigned int iterator = 0; iterator < option_numbers; iterator++) {
-                        if(iterator == 0) {
-                                log_info("Loop %dst inside main...", iterator + 1);
-                        } else if(iterator == 1) {
-                                log_info("Loop %dnd inside main...", iterator + 1);
+                for(unsigned int iterator = 1; iterator <= option_numbers; iterator++) {
+                        if(iterator == 1) {
+                                log_info("Loop %dst inside main...", iterator);
                         } else if(iterator == 2) {
-                                log_info("Loop %drd inside main...", iterator + 1);
+                                log_info("Loop %dnd inside main...", iterator);
+                        } else if(iterator == 3) {
+                                log_info("Loop %drd inside main...", iterator);
                         } else {
-                                log_info("Loop %dth inside main...", iterator + 1);
+                                log_info("Loop %dth inside main...", iterator);
                         }
 
                         // Read one number to choose a image filter.
                         int option;
                         scanf("%d", &option);
-                        assert (&option != NULL);
+                        assert(&option != NULL);
                         log_info("%d case was chosen...", option);
 
                         switch(option) {
